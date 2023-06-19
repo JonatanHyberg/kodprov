@@ -6,7 +6,8 @@ public class Entity {
     int type;
     int category;
     Color color;
-    final int size = 20;
+    final int size = 10;
+    final int offset = 10;
 
     public Entity(int x_position, int y_position, int entity_type) {
         this.x = x_position;
@@ -26,12 +27,15 @@ public class Entity {
         }
     }
 
-    public void update_position(int x_position, int y_position) {
+    public void update_position(int x_position, int y_position) throws Exception {
+        if(x_position > 300 || x_position < 0 || y_position > 300 || y_position < 0)
+            throw new Exception("Out of bound for object");
+            
         x = x_position;
         y = y_position;
     }
     public void drawEntity(Graphics g) {
         g.setColor(color);
-        g.fillOval(x, y, size, size);
+        g.fillOval(x-(size/2)+offset, y-(size/2)+offset, size, size);
     }
 }
