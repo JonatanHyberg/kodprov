@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class EntityHandler {
     public HashMap<Long, Entity> entitiesMap = new HashMap<>();  
     Pattern pattern = Pattern.compile("\\d+");
+    Pattern formatCheck = Pattern.compile("ID=\\d+;X=\\d+;Y=\\d+;TYPE=\\d+");
     
     public EntityHandler() {
 
@@ -15,8 +16,12 @@ public class EntityHandler {
         return entitiesMap.values();
     }
 
-    public void server_command_update(String command) {
-        //TODO handle wrong format command
+    //Input Parser
+    public void server_command_update(String command) throws Exception {
+        //checks correct input format
+        if(!formatCheck.matcher(command).matches())
+            throw new Exception("Wrong input format");
+
         Matcher matcher = pattern.matcher(command);
                 matcher.find();
                 long id = Long.parseLong(matcher.group());
@@ -32,7 +37,7 @@ public class EntityHandler {
                     entitiesMap.get(id).update_position(x, y);
                 }
                 else {
-                    entitiesMap.put(id, new Entity(x, y, type, true));
+                    entitiesMap.put(id, new Entity(x, y, type));
                 }
     }
 }
