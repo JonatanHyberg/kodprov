@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +9,10 @@ public class EntityHandler {
     
     public EntityHandler() {
 
+    }
+
+    public Collection<Entity>  getMapValues() {
+        return entitiesMap.values();
     }
 
     public void server_command_update(String command) {
