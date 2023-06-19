@@ -5,10 +5,10 @@ public class Entity {
     int y;
     int type;
     int category;
-    boolean visable;
     Color color;
+    final int size = 20;
 
-    public Entity(int x_position, int y_position, int entity_type, boolean visable) {
+    public Entity(int x_position, int y_position, int entity_type) {
         this.x = x_position;
         this.y = y_position;
         this.type = entity_type;
@@ -24,26 +24,14 @@ public class Entity {
             color = Color.BLUE;
             this.category = 2;
         }
-        this.visable = visable;
     }
 
     public void update_position(int x_position, int y_position) {
         x = x_position;
         y = y_position;
     }
-    
-    public void set_visable(boolean visable) {
-        this.visable = visable;
-    }
-
     public void drawEntity(Graphics g) {
         g.setColor(color);
-        g.fillOval(x, y, 30, 30);
+        g.fillOval(x, y, size, size);
     }
-    // @Override
-    // public void paint(Graphics g) {
-    //     g.setColor(color);
-    //     g.fillOval(x, y, 20, 20);
-    // }
-
 }
